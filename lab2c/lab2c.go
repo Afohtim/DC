@@ -2,46 +2,47 @@ package main
 
 import "fmt"
 
-func get_winner(respond chan<- int, index int, data []int) {
-	size := len(data)
-
-	if index >= size / 2 {
-		result := 0
-		if data[2 * index - size] >= data[2 * index + 1 - size] {
-			result = 2 * index	
+func get_winner(response chan<- int, left int, right int, data []int) {
+	if right - left == 1 {
+		ans := 0
+		if data[left] > data[right] {
+			ans = left
 		} else {
-			result = 2 * index + 1
-		}
-
-		respond <- result
+			ans = right
+		} 
+		response <- ans
+	} else if left == right {
+		response <- left
 	} else {
-		current_respond := make(chan int, 2)
+		current_response := make(chan int, 2)
 
-		go get_winner(current_respond, 2 * index, data)
-		go get_winner(current_respond, 2 * index + 1, data)
-		
-		firstData := <-current_respond
-		secondData := <-current_respond
+		mid := (left + right)/2
+		go get_winner(current_response, left, mid, data)
+		go get_winner(current_response, mid + 1, right, data)
 
-		result := 0
+		ans_1 := <-current_response
+		ans_2 := <-current_response
 
-		if data[firstData - size] >= data[secondData - size] {
-			result = firstData
+		ans := 0
+		if data[ans_1] >= data[ans_2] {
+			ans = ans_1
 		} else {
-			result = secondData
+			ans = ans_2
 		}
+		response <- ans
 
-		respond <- result
+
 	}
+	
 }
 
 func main() {
 	data := []int{ 12, 3, 5, 13, 4, 1, 13, 20, 22, 3, 5, 17, 1, 1, 13, 20}
+	size := len(data)
+	response := make(chan int, 2)
+	go get_winner(response, 0, size - 1, data)
 
-	respond := make(chan int, 2)
-	go get_winner(respond, 1, data)
+	result := <-response
 
-	result := <-respond
-
-	fmt.Printf("Result = %d\n", data[result - len(data)])
+	fmt.Printf("Result = %d\n", data[result])
 }
