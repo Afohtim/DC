@@ -10,7 +10,7 @@ public class SliderControl {
     final private int minValue = 10;
     final private int timeout = 10;
 
-    private Slider slider;
+    final private Slider slider;
 
     SliderControl(Slider slider) {
         this.slider = slider;
