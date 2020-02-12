@@ -1,15 +1,14 @@
 package com.lab3a;
 
-import java.util.concurrent.Semaphore;
 
 public class Pot {
-    private Semaphore semaphore;
+    private int semaphore;
     private int n;
     private int maxN;
     private boolean fullConfirmed;
 
     Pot(int n) {
-        semaphore = new Semaphore(1);
+        semaphore = 1;
         this.maxN = n;
         this.n = 0;
     }
@@ -17,9 +16,9 @@ public class Pot {
     boolean tryPut(){
         if(n < maxN)
         {
-            if(semaphore.tryAcquire()) {
+            if(tryAcquire()) {
                 n++;
-                semaphore.release();
+                release();
             }
             return true;
         }
@@ -38,10 +37,10 @@ public class Pot {
     boolean tryEatAll() {
         if(n == maxN)
         {
-            if(semaphore.tryAcquire()) {
+            if(tryAcquire()) {
                 n = 0;
                 fullConfirmed = false;
-                semaphore.release();
+                release();
                 return true;
             }
         }
@@ -59,14 +58,28 @@ public class Pot {
     boolean isFull() {
         if(fullConfirmed)
             return false;
-        while(semaphore.tryAcquire());
+        while(tryAcquire());
         boolean res = false;
         if(n == maxN) {
             res = true;
             fullConfirmed = true;
         }
-        semaphore.release();
+        release();
         return res;
+    }
+
+    public synchronized boolean tryAcquire() {
+        if(semaphore == 0) {
+            return false;
+        }
+        else {
+            semaphore = 0;
+            return true;
+        }
+    }
+
+    public synchronized void release() {
+        semaphore = 1;
     }
 
 }
