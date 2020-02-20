@@ -1,6 +1,13 @@
 package org.afohtim.lab4a;
 
-public abstract class Writer<Locker extends ReadWriteLockInterface> extends Lockable<Locker> {
+public class Writer<Locker extends ReadWriteLockInterface> extends Lockable<Locker> {
+    Action action;
+
+    Writer(Locker locker, Action action) {
+        this.locker = locker;
+        this.action = action;
+    }
+
     @Override
     protected void lock() {
         locker.writeLock();
@@ -8,7 +15,12 @@ public abstract class Writer<Locker extends ReadWriteLockInterface> extends Lock
 
     @Override
     protected void unlock() {
-        locker.readLock();
+        locker.writeUnlock();
+    }
+
+    @Override
+    protected String lockedRun() {
+        return action.act();
     }
 
 }

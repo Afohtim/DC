@@ -1,17 +1,20 @@
 package org.afohtim.lab4a;
 
-public abstract class Lockable<Locker extends ReadWriteLockInterface> implements Runnable {
+import java.util.concurrent.Callable;
+
+public abstract class Lockable<Locker extends ReadWriteLockInterface> implements Callable<String> {
 
     protected Locker locker;
 
     abstract protected void lock();
     abstract protected void unlock();
-    abstract protected void lockedRun();
+    abstract protected String lockedRun();
 
     @Override
-    public void run() {
+    public String call() {
         lock();
-        lockedRun();
+        String ans = lockedRun();
         unlock();
+        return ans;
     }
 }
