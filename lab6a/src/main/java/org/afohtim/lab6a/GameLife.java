@@ -13,11 +13,13 @@ public class GameLife {
     final int numberOfRegions = 4;
     CyclicBarrier barrier;
     ExecutorService executor;
+    JavaFXDumbSync javaFXDumbSync;
 
     public GameLife(Vector<Vector<SquareControl>> squareControls) {
         this.regions = new Vector<>();
         this.barrier = new CyclicBarrier(numberOfRegions);
         this.executor = Executors.newFixedThreadPool(numberOfRegions);
+        this.javaFXDumbSync = new JavaFXDumbSync();
         for(int regionId = 0; regionId < numberOfRegions; ++regionId) {
                 Vector<Vector<SquareControl>> regionSquares = new Vector<>();
             for(int i = 0; i < squareControls.size() / 2; ++i) {
@@ -26,7 +28,7 @@ public class GameLife {
                     regionSquares.lastElement().add(squareControls.get((squareControls.size() / 2 * (regionId / 2) + i)).get(squareControls.size() / 2  * (regionId % 2) + j));
                 }
             }
-            regions.add(new Region(regionSquares));
+            regions.add(new Region(regionSquares, javaFXDumbSync));
         }
         regions.get(0).setUpRegion(null, regions.get(1), regions.get(2), null, barrier);
         regions.get(1).setUpRegion(null, null, regions.get(3), regions.get(0), barrier);
@@ -40,12 +42,7 @@ public class GameLife {
     }
 
     public void stop(){
-        try {
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        executor.shutdown();
+        executor.shutdownNow();
         executor = Executors.newFixedThreadPool(numberOfRegions);
     }
 }

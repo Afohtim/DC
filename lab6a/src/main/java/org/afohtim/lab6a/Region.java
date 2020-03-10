@@ -19,9 +19,11 @@ public class Region implements Runnable {
     CyclicBarrier barrier;
     ReentrantLock lock;
     enum positions {Middle, Up, Right, Down, Left}
+    JavaFXDumbSync javaFXDumbSync;
 
-    Region(Vector<Vector<SquareControl>> squares) {
+    Region(Vector<Vector<SquareControl>> squares, JavaFXDumbSync javaFXDumbSync) {
         this.squares = squares;
+        this.javaFXDumbSync = javaFXDumbSync;
     }
 
     Region(Vector<Vector<SquareControl>> squares, Region up, Region right, Region down, Region left, CyclicBarrier barrier) {
@@ -180,9 +182,11 @@ public class Region implements Runnable {
             }
 
             for(int i = 0; i < buffer.size(); ++i)
-                for (int j = 0; j < buffer.get(i).size(); ++j)
+                for (int j = 0; j < buffer.get(i).size(); ++j) {
+                    javaFXDumbSync.lock();
                     squares.get(i).get(j).setAlive(buffer.get(i).get(j));
-
+                    javaFXDumbSync.unlock();
+                }
             try {
                 barrier.await();
             } catch (InterruptedException | BrokenBarrierException e) {

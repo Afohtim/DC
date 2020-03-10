@@ -15,12 +15,13 @@ public class MainWindow extends Application {
     private final int SIZE = 40;
     private Vector<Vector<SquareControl>> rectEvents;
     private GameLife gameLife;
+    private GridPane gridPane;
 
     GridPane createGrid(int size, Vector<Vector<SquareControl>> squareControls) {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < size; ++i)
         {
-            for (int j = 0;j < size; ++j) {
+            for (int j = 0; j < size; ++j) {
                 gridPane.add(squareControls.get(i).get(j).getSquare(), i, j);
             }
         }
@@ -43,7 +44,7 @@ public class MainWindow extends Application {
 
         gameLife = new GameLife(rectEvents);
 
-        GridPane gridPane = createGrid(SIZE, rectEvents);
+        gridPane = createGrid(SIZE, rectEvents);
 
         Button startButton = JavaFXButtonFactory.createButton("Start", 680, 50, 20, 80);
         Button stopButton = JavaFXButtonFactory.createButton("Stop", 680, 80, 20, 80);
@@ -88,12 +89,16 @@ public class MainWindow extends Application {
                         rectEvents.get(i).get(j).setAlive(false);
         });
 
+        Button updateGridButton = JavaFXButtonFactory.createButton("Update Grid", 680, 170, 20, 80,
+                this::updateGrid);
+
         Group group = new Group();
         group.getChildren().add(gridPane);
         group.getChildren().add(startButton);
         group.getChildren().add(hangarButton);
         group.getChildren().add(clearButton);
         group.getChildren().add(stopButton);
+        group.getChildren().add(updateGridButton);
         Scene scene = new Scene(group, 770, 700);
         scene.setFill(Color.GRAY);
         stage.setScene(scene);
@@ -101,5 +106,16 @@ public class MainWindow extends Application {
         stage.setTitle("Task1 a");
 
         stage.show();
+    }
+
+    private void updateGrid() {
+        for (int i = 0; i < SIZE; ++i)
+        {
+            for (int j = 0; j < SIZE; ++j) {
+                gridPane.add(rectEvents.get(i).get(j).getSquare(), i, j);
+            }
+        }
+        gridPane.setLayoutX(50);
+        gridPane.setLayoutY(50);
     }
 }
