@@ -15,11 +15,15 @@ public class Main {
         Nature nature = new Nature(garden);
         Gardener gardener = new Gardener(garden);
         ConsoleOut consoleOut = new ConsoleOut(garden);
+        FileOut fileOut = new FileOut(garden);
 
         executor.submit(nature);
         executor.submit(gardener);
         executor.submit(consoleOut);
+        executor.submit(fileOut);
 
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(10);
+
+        executor.shutdownNow();
     }
 }
