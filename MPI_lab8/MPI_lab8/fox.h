@@ -2,7 +2,7 @@
 #define FOX
 
 #include "tools.h"
-#include "consistent.h"
+#include "consecutive.h"
 
 void fox_method(float const * a, float const * b, float * c, int size, int process_id, int world_size);
 

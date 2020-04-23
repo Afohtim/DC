@@ -130,14 +130,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cannon.c" />
-    <ClCompile Include="consistent.c" />
+    <ClCompile Include="consecutive.c" />
     <ClCompile Include="fox.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="tape.c" />
     <ClCompile Include="tools.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="consistent.h" />
+    <ClInclude Include="consecutive.h" />
     <ClInclude Include="fox.h" />
     <ClInclude Include="cannon.h" />
     <ClInclude Include="tape.h" />

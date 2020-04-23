@@ -1,7 +1,7 @@
  # Potato PC results:
 ### Tape circuit method
 
-|dimension|consistent|time(2 threads) |Sp(2 threads)   |Ep(2 threads)   |time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
+|dimension|consecutive|time(2 threads) |Sp(2 threads)   |Ep(2 threads)   |time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
 |---------|----------|-----------|-----------|-----------|-----------|-----------|-----------|
 |100      |0.00156   |0.00161    |0.969      |0.48|0.00202   |0.772|0.193|
 |1000     |2.13 |1.52   |1.4|0.7|2.634081   |0.81|0.2|
@@ -9,14 +9,14 @@
 
 
 ### Fox's method
-|dimension|consistent|time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
+|dimension|consecutive|time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
 |---------|----------|-----------|-----------|-----------|
 |100      |0.00156  |0.00297   |0.525 | 0.13 |
 |1000     |2.13  |1.190267   |1.79| 0.448|
 |5000     |969|474 |2.04|0.51|
 
 ### Cannon method
-|dimension|consistent|time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
+|dimension|consecutive|time(4 threads) |Sp(4 threads)   |Ep(4 threads)   |
 |---------|----------|-----------|-----------|-----------|
 |100      |0.00156  |0.00261   |0.595|0.149|
 |1000     |2.13 |1.21   |1.76|0.44|

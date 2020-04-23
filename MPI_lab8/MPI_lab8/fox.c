@@ -90,7 +90,7 @@ void fox_method(float const * a, float const * b, float * c, int size, int proce
 			MPI_Recv(&a_matrix[0], (int)(current_size * current_size), MPI_FLOAT, (int)(a_row * dimension + j), tag, MPI_COMM_WORLD, &status);
 		}
 
-		consistent_multiplication(a_matrix, b_matrix, c_matrix, current_size);
+		consecutive_multiplication(a_matrix, b_matrix, c_matrix, current_size);
 
 		if (l + 1 != iterations)
 		{

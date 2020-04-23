@@ -75,7 +75,7 @@ void cannon_method(float const * a, float const * b, float * c, int size, int pr
 
 	for (int l = 0; l < iterations; ++l)
 	{
-		consistent_multiplication(a_matrix, b_matrix, c_matrix, current_size);
+		consecutive_multiplication(a_matrix, b_matrix, c_matrix, current_size);
 
 		if (l + 1 != iterations)
 		{

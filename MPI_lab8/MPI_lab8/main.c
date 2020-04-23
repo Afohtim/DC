@@ -1,4 +1,4 @@
-#include "consistent.h"
+#include "consecutive.h"
 #include "tape.h"
 #include "fox.h"
 #include "cannon.h"
@@ -11,9 +11,9 @@ int main()
 	int const id = CANNON_METHOD_ALGO_ID;
 
 	char const * name = "Undefined";
-	if (id == CONSISTENT_ALGO_ID)
+	if (id == CONSECUTIVE_ALGO_ID)
 	{
-		name = CONSISTENT_ALGO_NAME;
+		name = CONSECUTIVE_ALGO_NAME;
 	}
 	if (id == TAPE_CIRCUIT_ALGO_ID)
 	{
@@ -38,9 +38,9 @@ int main()
 
 	double delta = HUGE_VAL;
 
-	if (id == CONSISTENT_ALGO_ID)
+	if (id == CONSECUTIVE_ALGO_ID)
 	{
-		delta = consistent_multiplication_worktime(size, (int)process_id, (int)world_size);
+		delta = consecutive_multiplication_worktime(size, (int)process_id, (int)world_size);
 	}
 	if (id == TAPE_CIRCUIT_ALGO_ID)
 	{

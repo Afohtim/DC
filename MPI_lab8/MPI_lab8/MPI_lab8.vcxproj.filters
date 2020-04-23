@@ -18,7 +18,7 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="consistent.c">
+    <ClCompile Include="consecutive.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tape.c">
@@ -38,7 +38,7 @@
     <ClInclude Include="tools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="consistent.h">
+    <ClInclude Include="consecutive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tape.h">

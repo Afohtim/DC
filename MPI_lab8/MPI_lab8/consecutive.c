@@ -1,6 +1,6 @@
-#include "consistent.h"
+#include "consecutive.h"
 
-void consistent_multiplication(float const *a, float const *b, float *c, int size)
+void consecutive_multiplication(float const *a, float const *b, float *c, int size)
 {
 	for (int i = 0; i < size; ++i)
 	{
@@ -16,7 +16,7 @@ void consistent_multiplication(float const *a, float const *b, float *c, int siz
 	}
 }
 
-double consistent_multiplication_worktime(int size, int process_id, int world_size)
+double consecutive_multiplication_worktime(int size, int process_id, int world_size)
 {
 	if (process_id != 0)
 	{
@@ -36,7 +36,7 @@ double consistent_multiplication_worktime(int size, int process_id, int world_si
 
 	QueryPerformanceCounter(&start_time);
 
-	consistent_multiplication(a, b, c, size);
+	consecutive_multiplication(a, b, c, size);
 
 	QueryPerformanceCounter(&finish_time);
 
